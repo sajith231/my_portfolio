@@ -78,12 +78,12 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'portfolio',  # Replace with your MySQL database name
-        'USER': 'root',                # MySQL default user
-        'PASSWORD': '',                # Leave it blank if no password is set for root in XAMPP
-        'HOST': 'localhost',            # Or '127.0.0.1'
-        'PORT': '3306',                 # Default MySQL port
+        'ENGINE': 'django.db.backends.postgresql',  # Use the PostgreSQL backend
+        'NAME': 'portfolio',                # Replace with your PostgreSQL database name
+        'USER': 'postgres',                     # Your PostgreSQL username
+        'PASSWORD': 'sajith@2003',                 # Your PostgreSQL password
+        'HOST': 'localhost',                         # Or '127.0.0.1'
+        'PORT': '5432',                              # Default PostgreSQL port
     }
 }
 
