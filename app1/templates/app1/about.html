@@ -1,0 +1,188 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sajith Thomas - Fullstack Developer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            color: #ffffff;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            gap: 20px;
+        }
+        nav ul li {
+            margin-left: 20px;
+        }
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .active {
+            color: #00b8d4;
+        }
+
+        /* Hamburger Menu (Mobile View) */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+        .hamburger div {
+            width: 30px;
+            height: 4px;
+            background-color: #ffffff;
+            border-radius: 5px;
+        }
+        .nav-links {
+            display: flex;
+        }
+
+        .nav-links.active {
+            display: block;
+        }
+
+        .nav-links li {
+            margin-left: 0;
+            padding: 10px 0;
+        }
+
+        .content {
+            text-align: center;
+            padding: 50px 0;
+        }
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        h1 span {
+            color: #00b8d4;
+        }
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .profile-pic::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 2px solid #00b8d4;
+            border-radius: 50%;
+        }
+        .job-title {
+            font-size: 24px;
+            color: #00b8d4;
+            margin-bottom: 20px;
+        }
+        .description {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #00b8d4;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #0095a8;
+        }
+
+        /* Media Queries for Mobile */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                width: 100%;
+                text-align: center;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+            .nav-links li {
+                padding: 10px;
+                border-bottom: 1px solid #fff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">Sajith.</div>
+            <nav>
+                <div class="hamburger" onclick="toggleMenu()">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'education' %}">Education</a></li>
+                    <li><a href="{% url 'skills' %}">Skills</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="content">
+            <h1>About <span>Me</span></h1>
+            <div class="profile-pic">
+                <img src="{% static 'media/Screenshot 2024-10-12 100257.png' %}" alt="Jacob Aiden">
+            </div>
+            <p class="job-title">Fullstack Developer!</p>
+            <p class="description">"As a software developer, I am fueled by curiosity and a deep passion for solving real-world problems through code. My journey began with a fascination for how things work behind the scenes, and over time, I turned that curiosity into a love for building intuitive, scalable applications. I specialize in Python and Django, but I see coding as a continuous learning process, always exploring new tools and techniques. What excites me most is the opportunity to turn complex challenges into simple, elegant solutions, and to work with like-minded innovators to build things that matter." </p>
+        </main>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
