@@ -86,7 +86,7 @@ DATABASES = {
         'PORT': '5432',                              # Default PostgreSQL port
     }
 }
-
+# dhj
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
