@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sajith Thomas - Resume</title>
+    <title>Sajith Thomas - Fullstack Developer</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -146,6 +146,16 @@
                     <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="{% url 'education' %}">Education</a></li>
                     <li><a href="{% url 'skills' %}">Skills</a></li>
+                    <li><a href="{% url 'projects' %}">Projects</a></li>
+                    <span style="margin-left: 20%;">
+                        {% if user.is_authenticated %}
+                            <!-- Show logout button if the user is authenticated -->
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                        {% else %}
+                            <!-- Show login button if the user is not authenticated -->
+                            <li><a href="{% url 'login' %}">Login</a></li>
+                        {% endif %}
+                    </span>
                 </ul>
             </nav>
         </header>

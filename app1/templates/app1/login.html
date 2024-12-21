@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sajith Thomas - Fullstack Developer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000000;
+        }
+        .login-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        .emoji-container {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        .emoji {
+            transition: all 0.3s ease;
+        }
+        .emoji-closed-eyes {
+            transform: scaleY(0.3);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #000000;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .messages {
+            margin-top: 15px;
+            padding: 0;
+            list-style-type: none;
+        }
+        .messages li {
+            background-color: #f44336;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="emoji-container">
+            <span class="emoji">🙂</span>
+        </div>
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" required id="username-input">
+            <input type="password" name="password" placeholder="Password" required id="password-input">
+            <button type="submit">Login</button>
+        </form>
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <script>
+        const emoji = document.querySelector('.emoji');
+        const usernameInput = document.getElementById('username-input');
+        const passwordInput = document.getElementById('password-input');
+
+        usernameInput.addEventListener('focus', () => {
+            emoji.textContent = '🤨';
+        });
+
+        usernameInput.addEventListener('blur', () => {
+            emoji.textContent = '🙂';
+        });
+
+        passwordInput.addEventListener('focus', () => {
+            emoji.textContent = '😑';
+        });
+
+        passwordInput.addEventListener('blur', () => {
+            emoji.textContent = '🙂';
+        });
+    </script>
+</body>
+</html>
+</html>

@@ -207,6 +207,17 @@
                     <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="{% url 'education' %}">Education</a></li>
                     <li><a href="{% url 'skills' %}">Skills</a></li>
+                    <li><a href="{% url 'projects' %}">Projects</a></li>
+                    <!-- Other navigation items -->
+    <span style="margin-left: 20%;">
+        {% if user.is_authenticated %}
+            <!-- Show logout button if the user is authenticated -->
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+            <!-- Show login button if the user is not authenticated -->
+            <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+    </span>
                 </ul>
             </nav>
         </header>
@@ -220,15 +231,34 @@
                     "Dedicated software developer with a passion for building innovative web solutions using Python, Django, and modern front-end technologies. Experienced in designing and implementing full-stack applications, ensuring high performance and security. Skilled in debugging, testing, and optimizing code for seamless user experiences. Eager to embrace new challenges and contribute to dynamic projects that push the boundaries of technology."
                 </p>
                 
-                <div class="social-icons" >
-                    <a href="https://www.linkedin.com/in/sajith-thomas-1bb386304" class="social-icon" style="color: #0077B5;"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com/sajith231" class="social-icon" style="color: white;"><i class="fab fa-github"></i></a>
-                    <a href="https://www.facebook.com/sajith.thomas.710" class="social-icon" style="color: #3b5998;"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/sajith_thomazzzz/profilecard/?igsh=enV2NG9qN3A0MWo=" class="social-icon" style="color: #E4405F;"><i class="fab fa-instagram"></i></a>
-                    <a href="https://wa.me/919061947005" class="social-icon" style="color: #25D366;"><i class="fab fa-whatsapp"></i></a>
-                    <a href="mailto:sajiththomas231@gmail.com" class="social-icon" style="color: #DB4437;"><i class="fab fa-google"></i></a>
+                <div class="social-icons" style="display: flex; gap: 15px; margin-left: 5%; align-items: center;">
+    <a href="https://www.linkedin.com/in/sajith-thomas-1bb386304" class="social-icon" style="color: #0077B5; font-size: 30px; transition: all 0.3s ease;">
+        <i class="fab fa-linkedin-in"></i>
+    </a>
+    <a href="https://github.com/sajith231" class="social-icon" style="color: white; font-size: 30px; transition: all 0.3s ease;">
+        <i class="fab fa-github"></i>
+    </a>
+    <a href="https://www.facebook.com/sajith.thomas.710" class="social-icon" style="color: #3b5998; font-size: 30px; transition: all 0.3s ease;">
+        <i class="fab fa-facebook-f"></i>
+    </a>
+    <a href="https://www.instagram.com/sajith_thomazzzz/profilecard/?igsh=enV2NG9qN3A0MWo=" class="social-icon" style="color: #E4405F; font-size: 30px; transition: all 0.3s ease;">
+        <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://wa.me/919061947005" class="social-icon" style="color: #25D366; font-size: 30px; transition: all 0.3s ease;">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="mailto:sajiththomas231@gmail.com" class="social-icon" style="color: #DB4437; font-size: 30px; transition: all 0.3s ease;">
+        <i class="fab fa-google"></i>
+    </a>
+</div>
 
-                </div>
+<style>
+    .social-icons a:hover {
+        transform: scale(1.2); /* Slightly increase size on hover */
+        color: #fff; /* Change color on hover for better contrast */
+    }
+</style>
+
             </div>
             <div class="profile-image">
                 <img src="{% static 'media/Screenshot 2024-10-12 100257.png' %}" alt="Sajith Thomas" class="img-responsive">

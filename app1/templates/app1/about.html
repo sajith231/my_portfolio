@@ -164,6 +164,16 @@
                     <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="{% url 'education' %}">Education</a></li>
                     <li><a href="{% url 'skills' %}">Skills</a></li>
+                    <li><a href="{% url 'projects' %}">Projects</a></li>
+                    <span style="margin-left: 20%;">
+                        {% if user.is_authenticated %}
+                            <!-- Show logout button if the user is authenticated -->
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                        {% else %}
+                            <!-- Show login button if the user is not authenticated -->
+                            <li><a href="{% url 'login' %}">Login</a></li>
+                        {% endif %}
+                    </span>
                 </ul>
             </nav>
         </header>
