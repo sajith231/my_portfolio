@@ -34,3 +34,20 @@ class ProjectForm(forms.ModelForm):
                 raise forms.ValidationError("Video file size must be less than 100MB.")
             # Add more format validations if needed
         return video
+    
+
+
+
+# forms.py
+from django import forms
+from .models import Skill
+
+class SkillForm(forms.ModelForm):
+    class Meta:
+        model = Skill
+        fields = ['category', 'name', 'percentage']
+        widgets = {
+            'category': forms.Select(attrs={'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter skill name'}), 
+            'percentage': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter percentage'}), 
+        }

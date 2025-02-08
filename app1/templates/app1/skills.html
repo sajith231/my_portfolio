@@ -6,43 +6,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sajith Thomas - Fullstack Developer</title>
     <style>
+        /* Global Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: Arial, sans-serif;
             background-color: #000000;
             color: #ffffff;
+            line-height: 1.6;
         }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
+
+        /* Header Styles */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 0;
+            border-bottom: 1px solid #333;
         }
+
         .logo {
             font-size: 24px;
             font-weight: bold;
-            color: #ffffff;
+            color: #00bcd4;
         }
+
         nav ul {
             list-style-type: none;
             display: flex;
             gap: 20px;
         }
+
         nav ul li {
             margin-left: 20px;
         }
+
         nav ul li a {
             color: #ffffff;
-            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #00bcd4;
         }
 
         /* Hamburger Menu (Mobile View) */
@@ -52,88 +72,124 @@
             gap: 4px;
             cursor: pointer;
         }
+
         .hamburger div {
             width: 30px;
             height: 4px;
             background-color: #ffffff;
             border-radius: 5px;
         }
+
         .nav-links {
             display: flex;
         }
 
         .nav-links.active {
-            display: block;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background-color: #000000;
+            position: absolute;
+            top: 70px;
+            right: 20px;
+            padding: 20px;
+            border: 1px solid #333;
+            border-radius: 5px;
         }
 
-        .nav-links li {
-            margin-left: 0;
-            padding: 10px 0;
-        }
-
-        /* Content Styling */
+        /* Content Styles */
         h1 {
             text-align: center;
             font-size: 36px;
-            margin-bottom: 30px;
+            margin: 40px 0;
         }
+
         h1 span {
             color: #00bcd4;
         }
+
+        h2 {
+            color: #00bcd4;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
         .skills-container {
             display: flex;
             justify-content: space-between;
+            gap: 20px;
         }
+
         .skills-column {
             width: 48%;
         }
-        h2 {
-            color: #ffffff;
-            margin-bottom: 20px;
-        }
+
         .skill-item {
             margin-bottom: 20px;
         }
+
         .skill-name {
             display: flex;
             justify-content: space-between;
             margin-bottom: 5px;
+            font-size: 16px;
         }
+
         .skill-bar {
             height: 10px;
             background-color: #1e3a5f;
             border-radius: 5px;
             overflow: hidden;
         }
+
         .skill-progress {
             height: 100%;
             background-color: #00bcd4;
+            border-radius: 5px;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #00bcd4;
+            color: #000000;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0097a7;
         }
 
         /* Media Queries for Mobile */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                width: 100%;
-                text-align: center;
-            }
             .hamburger {
                 display: flex;
             }
+
+            .nav-links {
+                display: none;
+            }
+
             .nav-links.active {
                 display: flex;
-                flex-direction: column;
-                gap: 20px;
             }
-            .nav-links li {
-                padding: 10px;
-                border-bottom: 1px solid #fff;
+
+            .skills-container {
+                flex-direction: column;
+            }
+
+            .skills-column {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Header Section -->
         <header>
             <div class="logo">Sajith.</div>
             <nav>
@@ -150,217 +206,58 @@
                     <li><a href="{% url 'projects' %}">Projects</a></li>
                     <span style="margin-left: 20%;">
                         {% if user.is_authenticated %}
-                            <!-- Show logout button if the user is authenticated -->
                             <li><a href="{% url 'logout' %}">Logout</a></li>
                         {% else %}
-                            <!-- Show login button if the user is not authenticated -->
                             <li><a href="{% url 'login' %}">Login</a></li>
                         {% endif %}
                     </span>
                 </ul>
             </nav>
         </header>
+
+        <!-- Main Content Section -->
         <h1>My <span>Skills</span></h1>
         <div class="skills-container">
+            <!-- Coding Skills Column -->
             <div class="skills-column">
                 <h2>Coding Skills</h2>
+                {% for skill in coding_skills %}
                 <div class="skill-item">
                     <div class="skill-name">
-                        <span>Python</span>
-                        <span>95%</span>
+                        <span>{{ skill.name|upper }}</span>
+                        <span>{{ skill.percentage }}%</span>
                     </div>
                     <div class="skill-bar">
-                        <div class="skill-progress" style="width: 95%;"></div>
+                        <div class="skill-progress" style="width: {{ skill.percentage }}%;"></div>
                     </div>
                 </div>
-                <div class="skill-item">
-                    <div class="skill-name">
-                        <span>Django</span>
-                        <span>90%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 90%;"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">
-                        <span>HTML</span>
-                        <span>100%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 100%;"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">
-                        <span>CSS</span>
-                        <span>80%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 80%;"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">
-                        <span>Bootstrap</span>
-                        <span>100%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 100%;"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">
-                        <span>MYSQL</span>
-                        <span>95%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 95%;"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">
-                        <span>PostgreSQL </span>
-                        <span>90%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 90%;"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">
-                        <span>JavaScript</span>
-                        <span>70%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 70%;"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">
-                        <span>Jquery</span>
-                        <span>65%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 65%;"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">
-                        <span>Json</span>
-                        <span>60%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 60%;"></div>
-                    </div>
-                </div>
-                
+                {% endfor %}
             </div>
+
+            <!-- Professional Skills Column -->
             <div class="skills-column">
                 <h2>Professional Skills</h2>
+                {% for skill in professional_skills %}
                 <div class="skill-item">
                     <div class="skill-name">
-                        <span>Web Development</span>
-                        <span>90%</span>
+                        <span>{{ skill.name|upper }}</span>
+                        <span>{{ skill.percentage }}%</span>
                     </div>
                     <div class="skill-bar">
-                        <div class="skill-progress" style="width: 90%;"></div>
+                        <div class="skill-progress" style="width: {{ skill.percentage }}%;"></div>
                     </div>
                 </div>
-                <div class="skill-item">
-                    <div class="skill-name">
-                        <span>Web Design</span>
-                        <span>75%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 75%;"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">
-                        <span>Visual Studio Code (VS Code)</span>
-                        <span>100%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 100%;"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">
-                        <span>PyCharm</span>
-                        <span>100%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 100%;"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">
-                        <span>Git Hub</span>
-                        <span>95%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 90%;"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">
-                        <span>Git Lab</span>
-                        <span>95%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 90%;"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">
-                        <span>SQL Management Tools (e.g., pgAdmin, MySQL Workbench)</span>
-                        <span>85%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 85%;"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">
-                        <span>SSL Configuration and Management</span>
-                        <span>100%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 100%;"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">
-                        <span>AWS (Amazon Web Services)</span>
-                        <span>85%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 85%;"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">
-                        <span>Hostinger</span>
-                        <span>100%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 100%;"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">
-                        <span>QR Code Implementation</span>
-                        <span>90%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 90%;"></div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
+        </div>
+
+        <!-- Add Skill Button -->
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="{% url 'add_skill' %}" class="btn">Add Skill</a>
         </div>
     </div>
 
+    <!-- JavaScript for Hamburger Menu -->
     <script>
         function toggleMenu() {
             const navLinks = document.querySelector('.nav-links');

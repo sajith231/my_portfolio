@@ -122,7 +122,8 @@ USE_I18N = True
 
 USE_TZ = True
 
-
+LOGIN_URL = 'login'  # Use your login URL name
+LOGIN_REDIRECT_URL = 'skills'  # Redirect here after successful login
 
 # Directory where static files are collected for production
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
